@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+long long int base_decode(int* a, size_t a_length, int a_base){
+	unsigned long long int value = 0; // This is problematic
+	for(size_t i = 0; i < a_length; i++){
+		value += a[i] * pow(a_base, i);
+	}
+	return value;
+}
+
+void base_encode(int* b, int b_length, unsigned long long int value, int b_base){
+	for(size_t i = b_length - 1; ; i--){
+		b[i] = value / pow(b_base, i);
+		value -= pow(b_base, i) * b[i];
+		//printf("Its looping at i = %lu", i);
+		if(i == 0) break;
+	}
+}
+
+size_t search(int* array, int n, int x){
+	for(size_t i = 0; i < n; i++) if(array[i] == x) return i;
+}
+
+size_t strsearch(char* array, char x){
+	for(size_t i = 0; array[i] != '\0'; i++) if(array[i] == x) return i;
+}
+
+void printArray(int* arr, int n){
+	printf("[");
+	for(int i = 0; i < n; i++) printf("%d, ", arr[i]);
+	printf("]");
+}
+
+void setArray(int* arr, int n, int x){
+	for(int i = 0; i < n; i++) arr[i] = x;
+}
+
+void strrev(char* x, int n){
+	char buffer;
+	for(int i = 0; i < n / 2; i++){
+		buffer = x[i];
+		x[i] = x[n - i - 1];
+		x[n - i - 1] = buffer;
+	}
+}
+
+#define A_LENGTH 64
+#define B_LENGTH 64
+#define MAX_BASE 1024
+
+int main(){
+	printf("a base m = b base n\n");
+	char x[A_LENGTH];
+	int a[A_LENGTH], b[B_LENGTH];
+	setArray(a, A_LENGTH, 0);
+	setArray(b, B_LENGTH, 0);
+	char a_digits[MAX_BASE];
+	char b_digits[MAX_BASE];
+	int b_base;
+	printf("Whats a? ");
+	scanf("%s", x);
+	strrev(x, strlen(x));
+	printf("What are the digits in the base of a? ");
+	scanf("%s", a_digits);
+	printf("What are the digits in the base of the output (b)? ");
+	scanf("%s", b_digits);
+	for(int i = 0; x[i] != '\0'; i++) {
+		a[i] = strsearch(a_digits, x[i]);
+	}
+	unsigned long long  int value = base_decode(a, A_LENGTH, strlen(a_digits));
+	base_encode(b, B_LENGTH, value, strlen(b_digits));
+	for(int i = B_LENGTH - 1; i >= 0; i--) {
+		printf("%c", b_digits[b[i]]); 
+		if(i % 4 == 0) printf(" ");
+	}
+	printf("\n");
+}
+
