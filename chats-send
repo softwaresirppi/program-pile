@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# gets a file input from argument
+cat /dev/stdin | while IFS= read -r line; do
+    sleep $1;
+    xdotool type --delay 0 "$line"
+    xdotool key Return
+done

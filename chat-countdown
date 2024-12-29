@@ -1,0 +1,21 @@
+#!/usr/bin/sh
+
+sleepTime=1
+
+# xdotool type --delay 0 'Send "PULL THE RED WIRE" to deactivate'
+xdotool key Return
+sleep $sleepTime
+for x in $(seq $1 -1 0)
+do
+    if test $x -lt 3
+    then
+	xdotool type --delay 0 "and $x"
+    else
+	xdotool type --delay 0 "$x"
+    fi
+    xdotool key Return
+    sleep $sleepTime
+done
+xdotool type --delay 0 "KA BOOM!"
+xdotool key Return
+notify-send 'spam is done!'
