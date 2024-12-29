@@ -1,8 +1,0 @@
-#include <stdio.h>
-
-int main(int n, char** args){
-  FILE* front = fopen(args[1], "r+");
-  FILE* back = fopen(args[1], "a");
-  #define POS printf("front pos = %ld; back pos = %ld", ftell(front), ftell(back));
-  while(fgetc())
-}

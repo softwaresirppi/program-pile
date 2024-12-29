@@ -1,6 +1,0 @@
-#include <stdio.h>
-#define WORD_MAX_LEN 32
-int main(){
-  int n; scanf("%d", &n);
-  char words[][WORD_MAX_LEN]
-}
