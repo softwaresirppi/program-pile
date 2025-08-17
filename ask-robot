@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if test -z $1; then
+    echo "Its hard to answer a question, WHEN you dont ask a question, idiot. Thats just nature."
+    exit 1
+fi
+
+
+echo "$1" "?"
+
+if test $(($RANDOM % 2)) -eq 0; then
+    figlet "YES"
+else
+    figlet "NO"
+fi
